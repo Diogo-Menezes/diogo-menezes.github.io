@@ -30,6 +30,8 @@
     }
 
     function staticLoadPlaces() {
+      console.log('lat', navigator.geolocation.lat)
+      console.log('lng', navigator.geolocation.lng)
       return [
         {
           name: 'Current location',
