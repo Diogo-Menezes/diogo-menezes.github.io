@@ -23,8 +23,14 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
   </body>
-  <script>
-    window.onload = () => {
+  <script async>
+    window.onload = async () => {
+      let lat
+      let lng
+      navigator.geolocation.watchPosition(function success(position) {
+        lat = position.coords.latitude
+        lng = position.coords.longitude
+      })
       let places = staticLoadPlaces()
       renderPlaces(places)
     }
@@ -36,8 +42,8 @@
         {
           name: 'Current location',
           location: {
-            lat: navigator.geolocation.lat,
-            lng: navigator.geolocation.lng
+            lat,
+            lng
           }
         }
       ]
