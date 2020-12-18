@@ -25,19 +25,18 @@
   </body>
   <script async>
     window.onload = async () => {
-      let lat
-      let lng
+      let lat = ''
+      let lng = ''
       navigator.geolocation.watchPosition(function success(position) {
         lat = position.coords.latitude
         lng = position.coords.longitude
+        alert(lat + lng)
+        let places = staticLoadPlaces(lat, lng)
+        renderPlaces(places)
       })
-      let places = staticLoadPlaces()
-      renderPlaces(places)
     }
 
-    function staticLoadPlaces() {
-      alert('lat' + navigator.geolocation.lat)
-      alert('lng' + navigator.geolocation.lng)
+    function staticLoadPlaces(lat, lng) {
       return [
         {
           name: 'Current location',
