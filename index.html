@@ -6,14 +6,32 @@
     <!-- Look-at component. We don't need this now, but we will later. -->
     <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
   </head>
-  <body>
+  <body style="margin: 0; overflow: hidden">
     <a-scene
       vr-mode-ui="enabled: false"
       arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false;"
       renderer="antialias: true; alpha: true"
+      style="z-index: 0"
     >
-      <a-camera gps-projected-camera rotation-reader></a-camera>
       <a-box gps-projected-entity-place="latitude:  33.06296; longitude:-16.3332" material="color: red" scale="10 10 10"></a-box>
+      <a-camera gps-projected-camera rotation-reader></a-camera>
     </a-scene>
   </body>
+  <footer>Version</footer>
+  <script>
+    window.onload = async () => {
+      let lat = '33.063034'
+      let lng = '-16.354469'
+
+      navigator.geolocation.watchPosition(function success(position) {
+        lat = position.coords.latitude
+        lng = position.coords.longitude
+      })
+      const bodyEl = document.querySelector('body')
+      const child = document.createElement('h1')
+      child.innerHTML = `My lat: ${lat} my lng: ${lng}`
+      child.style = 'position:absolute,z-index:1000'
+      bodyEl.appendChild(child)
+    }
+  </script>
 </html>
