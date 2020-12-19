@@ -1,69 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>React AR Demo</title>
+    <title>AR.js Basic Projected Camera Example</title>
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+    <!-- Look-at component. We don't need this now, but we will later. -->
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
   </head>
-
-  <body style="margin: 0; overflow: hidden">
-    <a-scene vr-mode-ui="enabled: false" embedded arjs="sourceType: webcam; debugUIEnabled: false;">
+  <body>
+    <a-scene
+      vr-mode-ui="enabled: false"
+      arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false;"
+      renderer="antialias: true; alpha: true"
+    >
       <a-camera gps-projected-camera rotation-reader></a-camera>
-      <a-text
-        value="Hello"
-        look-at="[gps-camera]"
-        scale="120 120 120"
-        gps-entity-place="latitude: 33.063034; longitude: -16.354469"
-      ></a-text>
-      <!-- <a-box color="yellow" gps-projected-entity-place="latitude: 33.063034; longitude: -16.354469" /> -->
+      <a-box gps-projected-entity-place="latitude:  33.06296; longitude:-16.3332" material="color: red" scale="10 10 10"></a-box>
     </a-scene>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
   </body>
-  <script async>
-    window.onload = async () => {
-      let lat = '33.063034'
-      let lng = '-16.354469'
-      // navigator.geolocation.watchPosition(function success(position) {
-      //   lat = position.coords.latitude
-      //   lng = position.coords.longitude
-      // })
-    }
-    let places = staticLoadPlaces(lat, lng)
-    renderPlaces(places)
-
-    function staticLoadPlaces(lat, lng) {
-      return [
-        {
-          name: 'Current location',
-          location: {
-            lat,
-            lng
-          }
-        }
-      ]
-    }
-
-    function renderPlaces(places) {
-      let scene = document.querySelector('a-scene')
-
-      places.forEach((place) => {
-        let latitude = place.location.lat
-        let longitude = place.location.lng
-
-        let model = document.createElement('a-box')
-        model.setAttribute('color', 'yellow')
-        model.setAttribute('gps-projected-entity-place', `latitude: ${latitude}; longitude: ${longitude};`)
-
-        model.addEventListener('loaded', () => {
-          window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
-        })
-
-        scene.appendChild(model)
-      })
-    }
-  </script>
 </html>
