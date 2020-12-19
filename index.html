@@ -24,9 +24,11 @@
       let lng = '-16.354469'
 
       navigator.geolocation.watchPosition(function success(position) {
-        lat = position.coords.latitude
-        lng = position.coords.longitude
+        lat = position.coords.latitude.toFixed(4)
+        lng = position.coords.longitude.toFixed(4)
       })
+
+      alert(JSON.stringify({ lat, lng, box: 'latitude:  33.06296; longitude:-16.3332' }, null, 2))
       const bodyEl = document.querySelector('body')
       const child = document.createElement('h1')
       child.innerHTML = `My lat: ${lat} my lng: ${lng}`
