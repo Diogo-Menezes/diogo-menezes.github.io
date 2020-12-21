@@ -1,0 +1,8 @@
+{
+  "name": "diogo-menezes.github.io",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Diogo-Menezes/diogo-menezes.github.io.git",
+  "author": "Diogo Menezes <diogo444@hotmail.com>",
+  "license": "MIT"
+}
