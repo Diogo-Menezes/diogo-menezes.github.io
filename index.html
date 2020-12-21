@@ -30,7 +30,7 @@
       lng = position.coords.longitude
       let sceneEl = document.querySelector('a-scene')
 
-      let newLat = lat + (0.002 / 111) * (180 / 3.14159265)
+      let newLat = lat + (-0.002 / 111) * (180 / 3.14159265)
       let newLng = lng + ((-0.002 / 111) * (180 / 3.14159265)) / Math.cos((lat * 3.14159265) / 180)
 
       let markerEl = document.createElement('a-sphere')
