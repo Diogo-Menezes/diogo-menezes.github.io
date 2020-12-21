@@ -6,12 +6,14 @@
     <!-- Look-at component. We don't need this now, but we will later. -->
     <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
     <script type="text/javascript" src="peakfinder.js"></script>
+    <link rel="stylesheet" type="text/css" href="./style.css" />
   </head>
   <body style="margin: 0; overflow: hidden">
+    <div id="instructions" class="centered instructions"></div>
     <a-scene
       vr-mode-ui="enabled: false"
-      arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false;"
-      renderer="antialias: false; alpha: true"
+      embedded
+      arjs="sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;"
     >
       <!-- <a-sphere gps-projected-entity-place="latitude:  33.063034; longitude:-16.354469" material="color: white" scale="3 3 3"></a-sphere>
       <a-sphere gps-projected-entity-place="latitude:33.06285; longitude:-16.3542" material="color: blue" scale="3 3 3"></a-sphere> -->
@@ -20,7 +22,7 @@
       <!-- <a-entity peakfinder></a-entity> -->
     </a-scene>
   </body>
-  <footer>Version</footer>
+
   <script>
     let lat = 33.063034
     let lng = -16.354469
@@ -29,6 +31,10 @@
       lat = position.coords.latitude
       lng = position.coords.longitude
       let sceneEl = document.querySelector('a-scene')
+
+      // Calculate new lat and lng
+      // new_latitude = latitude + (dy / r_earth) * (180 / pi)
+      // new_longitude = longitude + ((dx / r_earth) * (180 / pi)) / cos((latitude * pi) / 180)
 
       let newLat = lat + (-0.002 / 111) * (180 / 3.14159265)
       let newLng = lng + ((-0.002 / 111) * (180 / 3.14159265)) / Math.cos((lat * 3.14159265) / 180)
@@ -40,6 +46,9 @@
       console.log('coords:', `lat: ${lat}; lng:${lng}`)
       console.log('new coords:', `lat: ${newLat}; lng:${newLng}`)
       sceneEl.appendChild(markerEl)
+
+      let instructionsEl = document.getElementById('instructions')
+      instructionsEl.innerHTML = `lat: ${newLat.toFixed(4)}; lng:${newLng.toFixed(4)}`
     })
   </script>
 </html>
