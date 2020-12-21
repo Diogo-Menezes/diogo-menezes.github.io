@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="./style.css" />
   </head>
   <body style="margin: 0; overflow: hidden">
-    <div id="instructions" class="centered instructions"></div>
+    <div id="info" class="centered info"></div>
     <a-scene
       vr-mode-ui="enabled: false"
       embedded
@@ -47,7 +47,7 @@
       console.log('new coords:', `lat: ${newLat}; lng:${newLng}`)
       sceneEl.appendChild(markerEl)
 
-      let instructionsEl = document.getElementById('instructions')
+      let instructionsEl = document.getElementById('info')
       instructionsEl.innerHTML = `lat: ${newLat.toFixed(4)}; lng:${newLng.toFixed(4)}`
     })
   </script>
