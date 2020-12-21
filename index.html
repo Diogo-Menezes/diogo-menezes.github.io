@@ -40,7 +40,7 @@
 
       let markerEl = document.createElement('a-sphere')
       markerEl.setAttribute('color', 'red')
-      placeText.setAttribute('title', 'Ponto 1')
+      markerEl.setAttribute('title', 'Ponto 1')
       markerEl.setAttribute('scale', '3 3 3')
       markerEl.addEventListener('loaded', () => {
         window.dispatchEvent(new CustomEvent('gps-entity-place-loaded'))
