@@ -2,8 +2,8 @@ var lat = 33.063034
 var lng = -16.354469
 
 navigator.geolocation.getCurrentPosition(function success(position) {
-  lat = position.coords.latitude
-  lng = position.coords.longitude
+  // lat = position.coords.latitude
+  // lng = position.coords.longitude
   let sceneEl = document.querySelector('a-scene')
 
   // Calculate new lat and lng method
@@ -13,9 +13,6 @@ navigator.geolocation.getCurrentPosition(function success(position) {
   var newLat = lat + (-0.0009 / 111) * (180 / 3.14159265)
   var newLng = lng + ((-0.0009 / 111) * (180 / 3.14159265)) / Math.cos((lat * 3.14159265) / 180)
 
-  lat = newLat
-  lng = newLng
-  
   let markerEl = document.createElement('a-link')
 
   markerEl.setAttribute('color', 'red')
