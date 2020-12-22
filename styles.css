@@ -28,4 +28,5 @@
   height:30%;
   opacity: 0.8;
   border-radius: 0 0 150px 150px;
+  z-index: 9999;
 }
