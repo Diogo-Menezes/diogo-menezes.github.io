@@ -1,5 +1,5 @@
-let lat = 33.063034
-let lng = -16.354469
+var lat = 33.063034
+var lng = -16.354469
 
 navigator.geolocation.getCurrentPosition(function success(position) {
   lat = position.coords.latitude
@@ -10,11 +10,14 @@ navigator.geolocation.getCurrentPosition(function success(position) {
   // new_latitude = latitude + (dy / r_earth) * (180 / pi)
   // new_longitude = longitude + ((dx / r_earth) * (180 / pi)) / cos((latitude * pi) / 180)
 
-  let newLat = lat + (-0.0009 / 111) * (180 / 3.14159265)
-  let newLng = lng + ((-0.0009 / 111) * (180 / 3.14159265)) / Math.cos((lat * 3.14159265) / 180)
+  var newLat = lat + (-0.0009 / 111) * (180 / 3.14159265)
+  var newLng = lng + ((-0.0009 / 111) * (180 / 3.14159265)) / Math.cos((lat * 3.14159265) / 180)
 
-  let markerEl = document.createElement('a-link')
+  lat = newLat
+  lng = newLng
   
+  let markerEl = document.createElement('a-link')
+
   markerEl.setAttribute('color', 'red')
 
   markerEl.setAttribute('title', 'Ponto 1')

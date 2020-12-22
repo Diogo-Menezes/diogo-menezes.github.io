@@ -13,8 +13,19 @@
 
 .info {
   position: fixed;
-  top: 5%;
+  bottom: 1%;
   font-size: 1.5em;
   color: white;
   z-index: 999999;
+}
+
+#map {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
+  height:30%;
+  opacity: 0.8;
+  border-radius: 0 0 150px 150px;
 }
