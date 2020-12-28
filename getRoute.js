@@ -1,16 +1,3 @@
-function addUserInitialPosition() {
-  console.log('CALLED',"addUserInitialPosition")
-  var m1 = new mapboxgl.Marker().setLngLat([lng, lat]).addTo(map)
-
-  navigator.geolocation.watchPosition((position) => {
-    
-    this.lng = position.coords.longitude
-    this.lat = position.coords.latitude
-
-    m1.setLngLat([position.coords.longitude, position.coords.latitude])
-  })
-}
-
 var route = [
   [-16.3544, 33.063],
   [-16.354024, 33.062737],
@@ -68,6 +55,24 @@ function addARPoints() {
     })
 
     sceneEl.appendChild(model)
+  })
+}
+
+var marker = null
+
+function addUserInitialPosition() {
+  console.log('CALLED', 'addUserInitialPosition')
+
+  marker = new mapboxgl.Marker()
+  marker.setLngLat([lat, lng]).addTo(map)
+}
+
+if (marker) {
+  navigator.geolocation.watchPosition((position) => {
+    lng = position.coords.longitude
+    lat = position.coords.latitude
+
+    marker.setLngLat([position.coords.longitude, position.coords.latitude])
   })
 }
 
