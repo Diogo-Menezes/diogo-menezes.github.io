@@ -1,5 +1,13 @@
 function addUserInitialPosition() {
-  new mapboxgl.Marker().setLngLat([lng, lat]).addTo(map)
+  var m1 = new mapboxgl.Marker()
+  m1.setLngLat([lng, lat]).addTo(map)
+
+  navigator.geolocation.watchPosition((position) => {
+    lng = position.coords.longitude
+    lat = position.coords.latitude
+
+    m1.setLngLat([position.coords.longitude, position.coords.latitude])
+  })
 }
 
 var route = [
