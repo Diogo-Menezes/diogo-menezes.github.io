@@ -1,4 +1,4 @@
-var route = [
+let route = [
   [-16.3544, 33.063],
   [-16.354024, 33.062737],
   [-16.354003, 33.062655],
@@ -12,6 +12,8 @@ var route = [
 
 function addRoute() {
   map.on('load', function () {
+    addUserInitialPosition()
+
     map.addSource('route', {
       type: 'geojson',
       data: {
@@ -48,7 +50,7 @@ function addARPoints() {
 
     model.setAttribute('gps-projected-entity-place', `latitude: ${lat}; longitude: ${lng}`)
 
-    model.setAttribute('scale', '3 3 3')
+    model.setAttribute('scale', '1 1 1')
 
     model.addEventListener('loaded', () => {
       model.dispatchEvent(new CustomEvent('gps-projected-entity-place-loaded'))
@@ -61,10 +63,7 @@ function addARPoints() {
 var marker = null
 
 function addUserInitialPosition() {
-  console.log('CALLED', 'addUserInitialPosition')
-
-  marker = new mapboxgl.Marker()
-  marker.setLngLat([lat, lng]).addTo(map)
+  marker = new mapboxgl.Marker().setLngLat([lng, lat]).addTo(map)
 }
 
 if (marker) {
@@ -74,10 +73,4 @@ if (marker) {
 
     marker.setLngLat([position.coords.longitude, position.coords.latitude])
   })
-}
-
-module.exports = {
-  addARPoints,
-  addRoute,
-  addUserInitialPosition
 }
