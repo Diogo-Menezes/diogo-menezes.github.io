@@ -12,7 +12,7 @@ let route = [
 
 function addRoute() {
   map.on('load', function () {
-    addUserInitialPosition()
+    addUserInitialPositionMarker()
 
     map.addSource('route', {
       type: 'geojson',
@@ -43,16 +43,18 @@ function addRoute() {
 
 function addARPoints() {
   const sceneEl = document.getElementById('scene')
+  let text = document.createElement('a-text')
+  text.setAttribute('gps-projected-entity-place', `latitude: ${lat}; longitude: ${lng}`)
+  text.setAttribute('color', 'yellow')
+  text.setAttribute('value', 'latlng')
+
+  sceneEl.appendChild(text)
+  
+  text.addEventListener('loaded', () => {
+    model.dispatchEvent(new CustomEvent('gps-projected-entity-place-loaded'))
+  })
 
   route.map(([lng, lat], index) => {
-    let text = document.createElement('a-text')
-    text.setAttribute('gps-projected-entity-place', `latitude: ${lat}; longitude: ${lng}`)
-    text.setAttribute('color', 'yellow')
-    text.setAttribute('value', 'latlng')
-    text.addEventListener('loaded', () => {
-      model.dispatchEvent(new CustomEvent('gps-projected-entity-place-loaded'))
-    })
-
     let model = document.createElement('a-link')
     // model.setAttribute('color', 'yellow')
     model.setAttribute('title', `Step ${index}`)
@@ -66,19 +68,19 @@ function addARPoints() {
     })
 
     sceneEl.appendChild(model)
-    sceneEl.appendChild(text)
   })
 }
 
 var marker = null
 var previousDate = new Date().getTime()
 
-function addUserInitialPosition() {
+function addUserInitialPositionMarker() {
   marker = new mapboxgl.Marker().setLngLat([lng, lat]).addTo(map)
 }
 
 if (marker) {
-  navigator.geolocation.watchPosition((position) => {
+  navigator.geolocation.getCurrentPosition((position) => {
+
     if (previousDate - position.timestamp >= 10000) {
       window.alert(position.timestamp)
       lng = position.coords.longitude
