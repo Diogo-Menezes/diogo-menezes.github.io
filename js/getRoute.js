@@ -8,7 +8,7 @@ function addUserInitialPosition() {
   m1.setLngLat([lng, lat]).addTo(map)
 
   navigator.geolocation.watchPosition((position) => {
-    console.log(this.lastDate - position.timestamp > 5000)
+    window.alert(this.lastDate - position.timestamp > 5000)
     let lat = position.coords.latitude
     let lng = position.coords.longitude
 
@@ -17,6 +17,8 @@ function addUserInitialPosition() {
       this.lat = lat
 
       this.m1.setLngLat([lng, lat])
+
+      this.map.animateCamera(CameraUpdateFactory.newLatLngZoom([lng, lat], 15))
 
       updateUserPositionInfo(lat, lng)
     }

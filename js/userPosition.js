@@ -35,6 +35,7 @@ function updateUserPositionInfo(lat, lng) {
   let instructionsEl = document.getElementById('info')
   instructionsEl.innerHTML = `lat: ${lat.toFixed(4)}; lng:${lng.toFixed(4)}`
 }
+
 module.exports = {
   updateUserPositionInfo
 }
