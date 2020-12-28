@@ -4,7 +4,6 @@ body {
 }
 
 .centered {
-  height: 20%;
   justify-content: center;
   position: fixed;
   bottom: 0%;
@@ -17,11 +16,12 @@ body {
 }
 
 .info {
+  width: fit-content;
   position: fixed;
-  bottom: 1%;
+  bottom: 5%;
   font-size: 1.5em;
   color: white;
-  z-index: 999999;
+
   background-color: rgba(0, 0, 0, 0.4);
 }
 
@@ -35,4 +35,23 @@ body {
   opacity: 0.8;
   border-radius: 0 0 150px 150px;
   z-index: 9999;
+}
+
+#fullScreenButton {
+  position: relative;
+  top: 0;
+  left: 0;
+  z-index: 999999;
+}
+
+.map-fullscreen {
+  height: 100vh !important;
+}
+
+.map-initial-position {
+  height: 30% !important;
+}
+
+.hidden {
+  display: none;
 }

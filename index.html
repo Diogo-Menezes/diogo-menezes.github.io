@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="./css/styles.css" />
   </head>
   <body>
-    <div id="map"></div>
+    <div id="map"><button id="fullScreenButton" onclick="toggle()">Map full screen</button></div>
     <div id="info" class="centered info"></div>
 
     <a-scene
@@ -19,7 +19,7 @@
       embedded
       arjs="sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false; trackingMethod: best;"
     >
-      <a-text value="H4" gps-projected-entity-place="latitude:33.063034; longitude: -16.354469" rotation="-90 0 0" color="blue"></a-text>
+      <a-text value="H4" position="0 0 15" rotation="-90 0 0" color="blue"></a-text>
 
       <a-camera
         id="camera1"
@@ -43,11 +43,29 @@
           style: 'mapbox://styles/mapbox/streets-v11',
           center: [lng, lat],
           zoom: 14,
-          interactive: true
+          interactive: true,
+          bearing: 0
         })
+          .getUiSettings()
+          .setCompassEnabled(true)
 
         addRoute()
         addARPoints()
+      }
+
+      var mapState = ''
+
+      function toggle() {
+        const sceneEl = document.getElementById('scene')
+        const mapEl = document.getElementById('map')
+        if (this.mapState === 'FULLSCREEN') {
+          mapEl.className = 'mapboxgl-map'
+          mapState = ''
+        } else {
+          mapEl.className = 'map-fullscreen mapboxgl-map'
+          sceneEl.className = 'hidden'
+          mapState = 'FULLSCREEN'
+        }
       }
     </script>
   </body>
