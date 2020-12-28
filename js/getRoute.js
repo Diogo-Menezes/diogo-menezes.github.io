@@ -71,6 +71,10 @@ if (marker) {
     lng = position.coords.longitude
     lat = position.coords.latitude
 
+    const sceneEl = document.getElementById('scene')
+
+    sceneEl.setAttribute('simulateAltitude', position.coords.altitude)
+
     marker.setLngLat([position.coords.longitude, position.coords.latitude])
   })
 }
