@@ -78,7 +78,7 @@ function addUserInitialPositionMarker() {
   marker = new mapboxgl.Marker().setLngLat([lng, lat]).addTo(map)
 }
 
-if (marker) {
+if (this.marker) {
   navigator.geolocation.getCurrentPosition((position) => {
 
     if (previousDate - position.timestamp >= 10000) {
