@@ -31,8 +31,10 @@ navigator.geolocation.getCurrentPosition(function success(position) {
   updateUserPositionInfo(newLat, newLng)
 })
 
-
-export function updateUserPositionInfo(lat, lng) {
+function updateUserPositionInfo(lat, lng) {
   let instructionsEl = document.getElementById('info')
   instructionsEl.innerHTML = `lat: ${lat.toFixed(4)}; lng:${lng.toFixed(4)}`
+}
+module.exports = {
+  updateUserPositionInfo
 }
