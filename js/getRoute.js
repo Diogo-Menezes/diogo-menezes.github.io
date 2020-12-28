@@ -43,6 +43,7 @@ function addRoute() {
 
 function addARPoints() {
   const sceneEl = document.getElementById('scene')
+
   route.map(([lng, lat], index) => {
     let text = document.createElement('a-text')
     text.setAttribute('gps-projected-entity-place', `latitude: ${lat}; longitude: ${lng}`)
@@ -58,7 +59,7 @@ function addARPoints() {
 
     model.setAttribute('gps-projected-entity-place', `latitude: ${lat}; longitude: ${lng}`)
 
-    model.setAttribute('scale', '1 1 1')
+    model.setAttribute('scale', '2 2 2')
 
     model.addEventListener('loaded', () => {
       model.dispatchEvent(new CustomEvent('gps-projected-entity-place-loaded'))
@@ -70,6 +71,7 @@ function addARPoints() {
 }
 
 var marker = null
+var previousDate = new Date().getTime()
 
 function addUserInitialPosition() {
   marker = new mapboxgl.Marker().setLngLat([lng, lat]).addTo(map)
@@ -77,13 +79,13 @@ function addUserInitialPosition() {
 
 if (marker) {
   navigator.geolocation.watchPosition((position) => {
-    lng = position.coords.longitude
-    lat = position.coords.latitude
+    if (previousDate - position.timestamp >= 10000) {
+      window.alert(position.timestamp)
+      lng = position.coords.longitude
+      lat = position.coords.latitude
 
-    const sceneEl = document.getElementById('scene')
-
-    sceneEl.setAttribute('simulateAltitude', position.coords.altitude)
-
-    marker.setLngLat([position.coords.longitude, position.coords.latitude])
+      previousDate = position.timestamp
+      marker.setLngLat([position.coords.longitude, position.coords.latitude])
+    }
   })
 }
