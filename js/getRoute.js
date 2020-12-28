@@ -44,6 +44,14 @@ function addRoute() {
 function addARPoints() {
   const sceneEl = document.getElementById('scene')
   route.map(([lng, lat], index) => {
+    let text = document.createElement('a-text')
+    text.setAttribute('gps-projected-entity-place', `latitude: ${lat}; longitude: ${lng}`)
+    text.setAttribute('color', 'yellow')
+    text.setAttribute('value', 'latlng')
+    text.addEventListener('loaded', () => {
+      model.dispatchEvent(new CustomEvent('gps-projected-entity-place-loaded'))
+    })
+
     let model = document.createElement('a-link')
     // model.setAttribute('color', 'yellow')
     model.setAttribute('title', `Step ${index}`)
@@ -57,6 +65,7 @@ function addARPoints() {
     })
 
     sceneEl.appendChild(model)
+    sceneEl.appendChild(text)
   })
 }
 

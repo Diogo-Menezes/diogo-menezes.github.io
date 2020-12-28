@@ -21,7 +21,12 @@
       embedded
       arjs="sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false; trackingMethod: best;"
     >
-      <a-text value="Hello world" position="0 1 0" rotation="-90 0 0" color="blue"></a-text>
+      <a-text value="H1" position=[gps-projected-camera] rotation="-90 0 0" color="blue"></a-text>
+      <a-text value="H2" position=[gps-camera] rotation="0 0 0" color="blue"></a-text>
+      <a-text value="H3" position="0 0 0" rotation="0 90 0" color="blue"></a-text>
+      <a-text value="H4" position="0 1 0" rotation="0 0 0" color="blue"></a-text>
+      <a-text value="H4" position="0 1 0" rotation="0 0 0" color="blue"></a-text>
+      
       <a-camera gps-projected-camera rotation-reader></a-camera>
     </a-scene>
     <script>
