@@ -2,30 +2,24 @@ const { updateUserPositionInfo } = require('./userPosition')
 
 var m1 = new mapboxgl.Marker()
 
-function addUserInitialPosition() {
+navigator.geolocation.watchPosition((position) => {
+  window.alert(this.lastDate - position.timestamp > 5000)
+  let lat = position.coords.latitude
+  let lng = position.coords.longitude
   
+  m1.setLngLat([lng, lat]).addTo(map)
 
-  var lastDate = new Date().getTime()
+  if (lastDate - position.timestamp > 5000) {
+    this.lng = lng
+    this.lat = lat
 
-  this.m1.setLngLat([lng, lat]).addTo(map)
+    this.m1.setLngLat([lng, lat])
 
-  navigator.geolocation.watchPosition((position) => {
-    window.alert(this.lastDate - position.timestamp > 5000)
-    let lat = position.coords.latitude
-    let lng = position.coords.longitude
+    this.map.animateCamera(CameraUpdateFactory.newLatLngZoom([lng, lat], 14))
 
-    if (lastDate - position.timestamp > 5000) {
-      this.lng = lng
-      this.lat = lat
-
-      this.m1.setLngLat([lng, lat])
-
-      this.map.animateCamera(CameraUpdateFactory.newLatLngZoom([lng, lat], 15))
-
-      updateUserPositionInfo(lat, lng)
-    }
-  })
-}
+    updateUserPositionInfo(lat, lng)
+  }
+})
 
 var route = [
   [-16.3544, 33.063],
@@ -89,6 +83,5 @@ function addARPoints() {
 
 module.exports = {
   addARPoints,
-  addRoute,
-  addUserInitialPosition
+  addRoute
 }
