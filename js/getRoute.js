@@ -1,11 +1,13 @@
 const { updateUserPositionInfo } = require('./userPosition')
 
+var m1 = new mapboxgl.Marker()
+
 function addUserInitialPosition() {
-  var m1 = new mapboxgl.Marker()
+  
 
   var lastDate = new Date().getTime()
 
-  m1.setLngLat([lng, lat]).addTo(map)
+  this.m1.setLngLat([lng, lat]).addTo(map)
 
   navigator.geolocation.watchPosition((position) => {
     window.alert(this.lastDate - position.timestamp > 5000)
