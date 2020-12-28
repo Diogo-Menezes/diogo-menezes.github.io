@@ -28,6 +28,11 @@ navigator.geolocation.getCurrentPosition(function success(position) {
 
   // sceneEl.appendChild(markerEl)
 
-  let instructionsEl = document.getElementById('info')
-  instructionsEl.innerHTML = `lat: ${newLat.toFixed(4)}; lng:${newLng.toFixed(4)}`
+  updateUserPositionInfo(newLat, newLng)
 })
+
+
+export function updateUserPositionInfo(lat, lng) {
+  let instructionsEl = document.getElementById('info')
+  instructionsEl.innerHTML = `lat: ${lat.toFixed(4)}; lng:${lng.toFixed(4)}`
+}
