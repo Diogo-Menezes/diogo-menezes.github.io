@@ -3,8 +3,9 @@ function addUserInitialPosition() {
   m1.setLngLat([lng, lat]).addTo(map)
 
   navigator.geolocation.watchPosition((position) => {
-    lng = position.coords.longitude
-    lat = position.coords.latitude
+    
+    this.lng = position.coords.longitude
+    this.lat = position.coords.latitude
 
     m1.setLngLat([position.coords.longitude, position.coords.latitude])
   })
