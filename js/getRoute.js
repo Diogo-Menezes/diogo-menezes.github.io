@@ -49,7 +49,7 @@ function addARPoints() {
   text.setAttribute('value', 'latlng')
 
   sceneEl.appendChild(text)
-  
+
   text.addEventListener('loaded', () => {
     model.dispatchEvent(new CustomEvent('gps-projected-entity-place-loaded'))
   })
@@ -78,19 +78,18 @@ function addUserInitialPositionMarker() {
   marker = new mapboxgl.Marker().setLngLat([lng, lat]).addTo(map)
 }
 
-window.addEventListener('deviceorientation', function(event) {
+window.addEventListener('deviceorientation', function (event) {
   if (event.webkitCompassHeading) {
     // You may consider adding/distracting landscape/portrait mode value here
-    alpha = event.webkitCompassHeading;
+    alpha = event.webkitCompassHeading
     // if (alpha < 0) { alpha += 360; }
     // if (alpha > 360) { alpha -= 360; }
     window.alert(alpha)
   }
-}  
+})
 
 if (this.marker) {
   navigator.geolocation.getCurrentPosition((position) => {
-
     if (previousDate - position.timestamp >= 10000) {
       window.alert(position.timestamp)
       lng = position.coords.longitude
